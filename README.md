@@ -12,7 +12,7 @@ The gotcha for skipping tests with the `skip` keyword is that the `setup` and `t
 
 This gem will allow you to use methods that begin with `skip_` to mark a test as skipped. It modifies Minitest such that it will recognize these skip methods and correctly report the results.
 
-```
+```ruby
 require "minitest/autorun"
 class TestSkip < Minitest::Test
   def setup
