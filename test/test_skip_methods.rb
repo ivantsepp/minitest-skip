@@ -32,12 +32,10 @@ class TestSkipMethods < Minitest::Test
     @reporter.report
 
     assert_includes @output.string.dup, "#skip_test_name = 0.00 s = S"
-    assert_includes @output.string.dup, <<-EOM.gsub(/^ {4}/, "")
-      1) Skipped:
-    ExampleSkipTest#skip_test_name [test/test_skip_methods.rb:8]:
-    Skipped from SkipPlugin
-    EOM
-
+    assert_includes @output.string.dup, "1) Skipped:"
+    assert_includes @output.string.dup, "ExampleSkipTest#skip_test_name"
+    assert_includes @output.string.dup, "test/test_skip_methods.rb:8"
+    assert_includes @output.string.dup, "Skipped from SkipPlugin"
   end
 
   def test_skip_methods_are_recorded
@@ -47,7 +45,7 @@ class TestSkipMethods < Minitest::Test
     assert result.skipped?
     assert_equal Minitest::Skip, failure.error.class
     assert_equal "Skipped from SkipPlugin", failure.error.message
-    assert_equal "test/test_skip_methods.rb:8", failure.location
+    assert_includes failure.location, "test/test_skip_methods.rb:8"
   end
 
   def test_skip_methods_are_not_executed
