@@ -2,6 +2,9 @@ require 'minitest/spec'
 
 module Minitest
   module SkipDSL
+
+    # Exact copy of Minitest::Spec::DSL#it except that it creates a method
+    # that starts with `skip_`
     def xit desc = "anonymous", &block
       block ||= proc { skip "(no tests defined)" }
 
@@ -21,6 +24,8 @@ module Minitest
       name
     end
 
+    # Exact copy of Minitest::Spec::DSL#nuke_test_methods! except that it
+    # also undefines `skip_` methods
     def nuke_test_methods! # :nodoc:
       self.public_instance_methods.grep(/^test_|skip_/).each do |name|
         self.send :undef_method, name
@@ -32,6 +37,8 @@ module Minitest
 end
 
 module Kernel
+  # Exact copy of Kernel#desribe except that it aliases `it` to `xit` for
+  # the class that is created
   def xdescribe(desc, *additional_desc, &block)
     stack = Minitest::Spec.describe_stack
     name  = [stack.last, desc, *additional_desc].compact.join("::")
