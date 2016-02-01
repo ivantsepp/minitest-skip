@@ -55,6 +55,14 @@ end
 
 ```
 
+Or you can use the `skip` macro (suggested by [@sgtFloyd](https://github.com/sgtFloyd)):
+
+```ruby
+skip def test_something
+  # ...
+end
+```
+
 ## Installation
 
 Add this line to your application's Gemfile:
