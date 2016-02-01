@@ -59,3 +59,10 @@ module Kernel
 
   private :xdescribe
 end
+
+class Minitest::Runnable
+  def self.skip(method_name)
+    undef_method(method_name)
+    define_method("skip_#{method_name}") {}
+  end
+end

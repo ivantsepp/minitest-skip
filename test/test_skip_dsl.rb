@@ -53,4 +53,21 @@ class TestSkipDSL < Minitest::Test
 
     assert_includes @output.string.dup, "4 runs, 1 assertions, 0 failures, 0 errors, 3 skips"
   end
+
+  def test_skip_macro
+    test = describe "Test" do
+      skip def test_something
+        assert false
+      end
+
+      def test_something_else
+        assert false
+      end
+      skip :test_something_else
+    end
+    test.run(@reporter)
+    @reporter.report
+
+    assert_includes @output.string.dup, "2 runs, 0 assertions, 0 failures, 0 errors, 2 skips"
+  end
 end
