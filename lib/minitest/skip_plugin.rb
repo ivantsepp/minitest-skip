@@ -6,6 +6,9 @@ module Minitest
     def run(reporter, options = {})
       super
       methods_matching(/^skip_/).each do |method_name|
+        # Minitest 5.13 added skip_until as a default method.
+        next if "method_name" == "skip_until"
+
         test = self.new(method_name)
         test.time = 0
 
