@@ -1,12 +1,14 @@
 module Minitest
   module SkipPlugin
-
     # Patch runnable.run(reporter, options) so that it
     # recognizes `skip_` methods and records them as skips
     def run(reporter, options = {})
       super
       methods_matching(/^skip_/).each do |method_name|
-        test = self.new(method_name)
+        # Minitest 5.13 added skip_until as a default method.
+        next if method_name == "skip_until"
+
+        test = new(method_name)
         test.time = 0
 
         skip = Skip.new("Skipped from SkipPlugin")
