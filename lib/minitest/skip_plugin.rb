@@ -16,6 +16,14 @@ module Minitest
         skip.set_backtrace(["#{source[0]}:#{source[1]}"])
         test.failures << skip
 
+        # Minitest 5.11 Added Minitest::Result#from
+        if Minitest.const_defined?(:Result)
+          test = Minitest::Result.from(test)
+        end
+
+        # Minitest 5.10.0 Added #prerecord
+        # see https://github.com/seattlerb/minitest/commit/c797bafa94838a98a9e41805df4517a7f0343d44
+        reporter.prerecord self, method_name if reporter.respond_to? :prerecord
         reporter.record(test)
       end
     end
