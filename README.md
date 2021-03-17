@@ -1,5 +1,8 @@
 # Minitest Skip
 
+[![Gem Version](https://badge.fury.io/rb/minitest-skip.svg)](https://badge.fury.io/rb/minitest-skip)
+![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/ivantsepp/minitest-skip)
+
 This gem provides alternative ways of skipping a test. Normally a skipped test in Minitest looks like:
 
 ```ruby
