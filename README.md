@@ -79,7 +79,7 @@ Or install it yourself as:
 
     $ gem install minitest-skip
 
-And that's it! This is a Minitest plugin which means that it will be autoloaded. If you want to use `xit` and `xdescribe` methods, you also need to `require "minitest/skip_dsl"`.
+And that's it! This is a Minitest plugin which means that it will be autoloaded. If you want to use `xit` and `xdescribe` methods or the `skip` macro, you also need to `require 'minitest/skip_dsl'`.
 
 ## Contributing
 
