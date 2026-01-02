@@ -18,7 +18,7 @@ class TestSkipMethods < Minitest::Test
   end
 
   def test_run_skip
-    @test.run(@reporter)
+    @test.run_suite(@reporter)
     @reporter.report
     assert_includes @output.string.dup, "1 runs, 0 assertions, 0 failures, 0 errors, 1 skips"
   end
@@ -28,7 +28,7 @@ class TestSkipMethods < Minitest::Test
     @progress_reporter.options = { verbose: true }
     @summary_reporter.options = { verbose: true }
 
-    @test.run(@reporter)
+    @test.run_suite(@reporter)
     @reporter.report
 
     assert_includes @output.string.dup, "#skip_test_name = 0.00 s = S"
@@ -39,7 +39,7 @@ class TestSkipMethods < Minitest::Test
   end
 
   def test_skip_methods_are_recorded
-    @test.run(@reporter)
+    @test.run_suite(@reporter)
     result = @summary_reporter.results.first
     failure = result.failures.first
     assert result.skipped?
@@ -49,7 +49,7 @@ class TestSkipMethods < Minitest::Test
   end
 
   def test_skip_methods_are_not_executed
-    @test.run(@reporter)
+    @test.run_suite(@reporter)
     refute @@ran, "skip methods should not be executed"
   end
 

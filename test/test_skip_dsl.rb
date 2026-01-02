@@ -17,7 +17,7 @@ class TestSkipDSL < Minitest::Test
       it "normal" do assert true end
       xit "skipped" do assert false end
     end
-    test.run(@reporter)
+    test.run_suite(@reporter)
     @reporter.report
 
     assert_includes @output.string.dup, "2 runs, 1 assertions, 0 failures, 0 errors, 1 skips"
@@ -28,7 +28,7 @@ class TestSkipDSL < Minitest::Test
       it "normal" do assert true end
       xit "skipped" do assert false end
     end
-    test.run(@reporter)
+    test.run_suite(@reporter)
     @reporter.report
 
     assert_includes @output.string.dup, "2 runs, 0 assertions, 0 failures, 0 errors, 2 skips"
@@ -46,9 +46,9 @@ class TestSkipDSL < Minitest::Test
         end
       end
     end
-    test.run(@reporter)
-    nested_1.run(@reporter)
-    nested_2.run(@reporter)
+    test.run_suite(@reporter)
+    nested_1.run_suite(@reporter)
+    nested_2.run_suite(@reporter)
     @reporter.report
 
     assert_includes @output.string.dup, "4 runs, 1 assertions, 0 failures, 0 errors, 3 skips"
@@ -65,7 +65,7 @@ class TestSkipDSL < Minitest::Test
       end
       skip :test_something_else
     end
-    test.run(@reporter)
+    test.run_suite(@reporter)
     @reporter.report
 
     assert_includes @output.string.dup, "2 runs, 0 assertions, 0 failures, 0 errors, 2 skips"
